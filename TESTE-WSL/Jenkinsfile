@@ -3,6 +3,10 @@ pipeline {
         label 'WSL_Ubuntu'
     }
 
+    tools {
+        git 'linux-git'
+    }
+
     stages {
         stage('Build a Docker Image') {
             steps {

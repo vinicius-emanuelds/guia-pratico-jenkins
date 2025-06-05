@@ -28,8 +28,8 @@ pipeline {
 
             agent {
                 docker {
-                    image: 'jenkins/inbound-agent:latest-alpine'
-                    args: '-u root'
+                    image 'jenkins/inbound-agent:latest-alpine'
+                    args '-u root'
                 }
             }
 
@@ -45,7 +45,7 @@ pipeline {
                     echo "Verificando a instalação:"
                     kubectl version --client
                 '''
-                
+
                 withKubeConfig([credentialsId: 'kubeconfig']) {
                     sh 'sed -i "s/{{tag}}/$tag_version/g" ./k8s/deployment.yaml'
                     sh 'kubectl apply -f ./k8s/deployment.yaml'

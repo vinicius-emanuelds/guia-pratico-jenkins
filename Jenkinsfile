@@ -1,6 +1,29 @@
 pipeline {
     agent any
 
+    post {
+        always {
+            // Chuck Norris aparece em todos os builds
+            chuckNorris()
+        }
+       
+        success {
+            echo '🚀 Deploy realizado com sucesso!'
+            echo '💪 Chuck Norris aprova seu pipeline DevSecOps!'
+            echo "✅ Imagem jamalshadowdev/meuapp:${env.BUILD_ID} deployada no Kubernetes"
+        }
+       
+        failure {
+            echo '❌ Build falhou, mas Chuck Norris nunca desiste!'
+            echo '🔍 Chuck Norris está investigando o problema...'
+            echo '💡 Verifique: Docker build, DockerHub push ou Kubernetes deploy'
+        }
+       
+        unstable {
+            echo '⚠️ Build instável - Chuck Norris está monitorando'
+        }
+    }
+
     stages {
         stage('Build a Docker Image') {
             steps {
